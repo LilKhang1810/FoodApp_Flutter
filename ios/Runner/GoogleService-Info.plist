@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAkAhvxaqS6ufVUQ5ZqtOc2CsEVKZUag8E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>221927118629</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.foodApp</string>
+	<key>PROJECT_ID</key>
+	<string>foodapp-72ca8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>foodapp-72ca8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:221927118629:ios:e616d6858ef8a6a67beccc</string>
+	<key>DATABASE_URL</key>
+	<string>https://foodapp-72ca8-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
