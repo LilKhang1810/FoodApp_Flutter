@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:food_app/detail_view.dart';
 import 'package:food_app/model/brand.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:food_app/model/cart.dart';
@@ -26,7 +27,9 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   List<Brand> brandList = [];
   List<Food> foodList = [];
-
+  late List<Food> filterFood = [];
+  bool isSearching = false;
+  TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -89,67 +92,145 @@ class _HomePage extends State<HomePage> {
     });
   }
 
+  void filterResult(String key) {
+    filterFood = foodList;
+    setState(() {
+      if (key.isNotEmpty) {
+        isSearching = true;
+        filterFood = foodList
+            .where(
+                (food) => food.name.toLowerCase().contains(key.toLowerCase()))
+            .toList();
+      } else {
+        isSearching = false;
+        filterFood = [];
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: <Widget>[
           HomePageBar(),
-          Column(
-            children: [
-              SearchField(),
-              BrandsList(),
-              Banner(),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Title(title: 'Recommend for you'),
-                  GestureDetector(
-                    onTap: () {
-                      print('Show All');
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextField(
+              controller: _controller,
+              onChanged: (key) => {filterResult(key)},
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(vertical: 13),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(width: 0.8),
+                  ),
+                  hintText: 'Gà rán, Pizza, ... ',
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      _controller.clear();
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Row(
-                        children: <Widget>[
-                          Text("Show all"),
-                          Icon(Icons.arrow_forward_outlined)
-                        ],
-                      ),
-                    ),
+                    icon: Icon(Icons.clear_sharp),
+                  )),
+            ),
+          ),
+          Stack(
+            children: [
+              Column(
+                children: [
+                  BrandsList(),
+                  Banner(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Title(title: 'Recommend for you'),
+                      GestureDetector(
+                        onTap: () {
+                          print('Show All');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Text("Show all"),
+                              Icon(Icons.arrow_forward_outlined)
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  RecommendList(foodList: foodList),
+                  Title(title: 'Category'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CaterogyList(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Title(title: 'Summer refreshment'),
+                  Container(
+                    height: 870,
+                    child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.69,
+                        ),
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: foodList
+                            .where((food) => food.type == 'drinks')
+                            .toList()
+                            .length,
+                        itemBuilder: (context, index) => CardProduct(
+                            foodList: foodList
+                                .where((food) => food.type == 'drinks')
+                                .toList(),
+                            index: index)),
                   )
                 ],
               ),
-              RecommendList(foodList: foodList),
-              Title(title: 'Category'),
-              SizedBox(
-                height: 20,
-              ),
-              CaterogyList(),
-              SizedBox(
-                height: 20,
-              ),
-              Title(title: 'Summer refreshment'),
-              Container(
-                height: 870,
-                child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.69,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 10,
+                          offset: Offset(0, 3),
+                        )
+                      ]),
+                  child: Visibility(
+                    visible: isSearching && filterFood.isNotEmpty,
+                    child: Container(
+                      height: 300,
+                      child: ListView.builder(
+                        itemCount: filterFood.length,
+                        itemBuilder: ((context, index) {
+                          return ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          DetailView(food: filterFood[index])));
+                            },
+                            title: Text(filterFood[index].name),
+                            dense: true,
+                          );
+                        }),
+                      ),
                     ),
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: foodList
-                        .where((food) => food.type == 'drinks')
-                        .toList()
-                        .length,
-                    itemBuilder: (context, index) => CardProduct(
-                        foodList: foodList
-                            .where((food) => food.type == 'drinks')
-                            .toList(),
-                        index: index)),
+                  ),
+                ),
               )
             ],
           ),
@@ -226,7 +307,6 @@ class _HomePage extends State<HomePage> {
   }
 
   SizedBox BrandsList() {
-    List<Brand> limitedBrandList = brandList.sublist(0, 5);
     return SizedBox(
       height: 80,
       child: GridView.builder(
@@ -237,7 +317,7 @@ class _HomePage extends State<HomePage> {
             mainAxisSpacing: 20.0, // Khoảng cách giữa các dòng theo chiều dọc
           ),
           scrollDirection: Axis.horizontal,
-          itemCount: limitedBrandList.length,
+          itemCount: brandList.length,
           itemBuilder: (context, index) {
             return Container(
               decoration: BoxDecoration(
@@ -253,38 +333,11 @@ class _HomePage extends State<HomePage> {
                 ],
               ),
               child: Image.network(
-                limitedBrandList[index].img_url,
+                brandList[index].img_url,
                 fit: BoxFit.fitHeight,
               ),
             );
           }),
-    );
-  }
-}
-
-class SearchField extends StatelessWidget {
-  const SearchField({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: TextField(
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(vertical: 13),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(width: 0.8),
-            ),
-            hintText: 'Gà rán, Pizza, ... ',
-            prefixIcon: Icon(Icons.search),
-            suffixIcon: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.clear_sharp),
-            )),
-      ),
     );
   }
 }

@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/detail_view.dart';
+import 'package:provider/provider.dart';
 
+import '../model/cart.dart';
 import '../model/food.dart';
 
 class CardProduct extends StatelessWidget {
@@ -106,9 +109,16 @@ class CardProduct extends StatelessWidget {
                   SizedBox(
                     width: 75,
                   ),
-                  Icon(
-                    Icons.shopping_cart,
-                    color: Colors.orangeAccent,
+                  GestureDetector(
+                    onTap: () {
+                      CartProvider cart =
+                          Provider.of<CartProvider>(context, listen: false);
+                      cart.addToCart(foodList[index]);
+                    },
+                    child: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.orangeAccent,
+                    ),
                   )
                 ],
               ),
