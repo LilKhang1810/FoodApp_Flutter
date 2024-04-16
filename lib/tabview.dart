@@ -27,24 +27,25 @@ class _TabViewState extends State<TabView> {
       bottomNavigationBar: Container(
         color: Colors.yellow.withOpacity(0.2),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          padding:
+              const EdgeInsets.only(left: 15, right: 15, bottom: 25, top: 15),
           child: GNav(
             tabBorderRadius: 25,
             tabActiveBorder: Border.all(color: Colors.black, width: 1),
             gap: 8,
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(6),
             tabs: const [
               GButton(
                 icon: Icons.home_rounded,
-                text: 'Home',
+                text: 'Trang chủ',
               ),
               GButton(
                 icon: Icons.shopping_bag_rounded,
-                text: 'Cart',
+                text: 'Giỏ hàng',
               ),
               GButton(
                 icon: Icons.favorite_sharp,
-                text: 'Favorite',
+                text: 'Yêu thích',
               ),
               GButton(
                 icon: Icons.person_rounded,

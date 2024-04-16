@@ -396,6 +396,7 @@ class _HomePageBarState extends State<HomePageBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       actions: <Widget>[
         Title(title: 'Hello Khang!'),
         SizedBox(
