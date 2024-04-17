@@ -6,6 +6,7 @@ class Food {
   final String type;
   final int price;
   final double rating;
+  late bool isFavorited = false;
   Food({
     required this.name,
     required this.brand,

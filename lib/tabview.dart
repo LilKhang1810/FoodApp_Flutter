@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:food_app/cart_view.dart';
+import 'package:food_app/favorite_view.dart';
 import 'package:food_app/home_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -17,7 +18,7 @@ class _TabViewState extends State<TabView> {
   final List<Widget> tabOptions = <Widget>[
     HomePage(),
     CartView(),
-    Center(child: Text('Favorite Screen')),
+    FavoriteScreen(),
     Center(child: Text('Profile Screen')),
   ];
   @override

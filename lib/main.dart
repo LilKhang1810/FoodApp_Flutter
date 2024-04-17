@@ -7,18 +7,21 @@ import 'package:food_app/model/cart.dart';
 import 'package:food_app/model/food.dart';
 import 'package:food_app/tabview.dart';
 import 'package:provider/provider.dart';
+import 'favorite_view.dart';
 import 'home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => CartProvider(),
-      child: MyApp(),
-    ),
-  );
-  
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => CartProvider(),
+      ),
+      ChangeNotifierProvider(create: (context) => FavoriteController()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

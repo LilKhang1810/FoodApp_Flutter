@@ -23,6 +23,7 @@ class RecommendList extends StatelessWidget {
           itemBuilder: (context, index) => CardProduct(
             foodList: foodList,
             index: index,
+            isFavorite: foodList[index].isFavorited,
           ),
         ),
       ),

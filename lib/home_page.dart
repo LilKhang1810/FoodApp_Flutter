@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:food_app/detail_view.dart';
+import 'package:food_app/favorite_view.dart';
 import 'package:food_app/model/brand.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:food_app/model/cart.dart';
@@ -108,6 +109,7 @@ class _HomePage extends State<HomePage> {
     });
   }
 
+  FavoriteController favoriteController = FavoriteController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -187,10 +189,12 @@ class _HomePage extends State<HomePage> {
                             .toList()
                             .length,
                         itemBuilder: (context, index) => CardProduct(
-                            foodList: foodList
-                                .where((food) => food.type == 'drinks')
-                                .toList(),
-                            index: index)),
+                              foodList: foodList
+                                  .where((food) => food.type == 'drinks')
+                                  .toList(),
+                              index: index,
+                              isFavorite: false,
+                            )),
                   )
                 ],
               ),

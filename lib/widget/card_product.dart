@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:food_app/detail_view.dart';
+import 'package:food_app/favorite_view.dart';
 import 'package:provider/provider.dart';
 
 import '../model/cart.dart';
@@ -11,10 +13,12 @@ class CardProduct extends StatelessWidget {
     super.key,
     required this.foodList,
     required this.index,
+    required this.isFavorite,
   });
 
   final List<Food> foodList;
   final int index;
+  final bool isFavorite;
   String formatCurrency(int price) {
     // Chuyển đổi giá tiền thành chuỗi và thêm dấu phẩy
     String formattedPrice = price.toString().replaceAllMapped(
@@ -71,9 +75,27 @@ class CardProduct extends StatelessWidget {
                           TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Icon(
-                    Icons.favorite_border,
-                    color: Colors.red,
+                  GestureDetector(
+                    onTap: () {
+                      FavoriteController fav = Provider.of<FavoriteController>(
+                          context,
+                          listen: false);
+                      if (isFavorite == false) {
+                        fav.addToFav(foodList[index]);
+                        print(foodList[index].name);
+                      } else {
+                        fav.removeFromFav(foodList[index]);
+                      }
+                    },
+                    child: !isFavorite
+                        ? Icon(
+                            Icons.favorite_border,
+                            color: Colors.red,
+                          )
+                        : Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
                   )
                 ],
               ),
