@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/model/food.dart';
-import 'package:food_app/tabview.dart';
+import 'package:food_app/screen/tabview.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-import 'model/cart.dart';
+import '../model/cart.dart';
 
 class CartView extends StatefulWidget {
   const CartView({super.key});

@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/detail_view.dart';
+import 'package:food_app/screen/detail_view.dart';
 import 'package:food_app/model/brand.dart';
 import 'package:food_app/model/cart.dart';
 import 'package:food_app/model/food.dart';
-import 'package:food_app/tabview.dart';
+import 'package:food_app/screen/login_screen.dart';
+import 'package:food_app/screen/tabview.dart';
 import 'package:provider/provider.dart';
-import 'favorite_view.dart';
-import 'home_page.dart';
+import 'screen/favorite_view.dart';
+import 'screen/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: TabView()
+        home: SignInPage()
         // home: DetailView(
         //   food: Food(
         //       name: 'EVM serving of 6 chicken McNuggets™',

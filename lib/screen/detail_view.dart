@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:food_app/model/cart.dart';
 import 'package:provider/provider.dart';
-import 'model/food.dart';
+import '../model/food.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 class DetailView extends StatefulWidget {

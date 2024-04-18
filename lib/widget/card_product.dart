@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:food_app/detail_view.dart';
-import 'package:food_app/favorite_view.dart';
+import 'package:food_app/screen/detail_view.dart';
+import 'package:food_app/screen/favorite_view.dart';
 import 'package:provider/provider.dart';
 
 import '../model/cart.dart';

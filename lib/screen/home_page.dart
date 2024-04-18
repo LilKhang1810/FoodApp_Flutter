@@ -7,16 +7,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:food_app/detail_view.dart';
-import 'package:food_app/favorite_view.dart';
+import 'package:food_app/screen/detail_view.dart';
+import 'package:food_app/screen/favorite_view.dart';
 import 'package:food_app/model/brand.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:food_app/model/cart.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'model/food.dart';
-import 'widget/recommend_list.dart';
-import 'widget/card_product.dart';
+import '../model/food.dart';
+import '../widget/recommend_list.dart';
+import '../widget/card_product.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

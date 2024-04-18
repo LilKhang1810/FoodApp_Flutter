@@ -1,9 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:food_app/cart_view.dart';
-import 'package:food_app/favorite_view.dart';
-import 'package:food_app/home_page.dart';
+import 'package:food_app/screen/cart_view.dart';
+import 'package:food_app/screen/favorite_view.dart';
+import 'package:food_app/screen/home_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class TabView extends StatefulWidget {
