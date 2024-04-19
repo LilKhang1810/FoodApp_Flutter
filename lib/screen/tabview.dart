@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/screen/cart_view.dart';
 import 'package:food_app/screen/favorite_view.dart';
 import 'package:food_app/screen/home_page.dart';
+import 'package:food_app/screen/profile_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class TabView extends StatefulWidget {
@@ -19,7 +20,7 @@ class _TabViewState extends State<TabView> {
     HomePage(),
     CartView(),
     FavoriteScreen(),
-    Center(child: Text('Profile Screen')),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

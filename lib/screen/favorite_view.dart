@@ -9,15 +9,16 @@ class FavoriteController extends ChangeNotifier {
   bool isFavorite(Food food) {
     return favList.contains(food);
   }
+
   void addToFav(Food food) {
     favList.add(food);
-    
+
     notifyListeners();
   }
 
   void removeFromFav(Food food) {
     favList.remove(food);
-    
+
     notifyListeners();
   }
 }
@@ -45,9 +46,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text(
-        'Món yêu thích',
-      )),
+            'Món yêu thích',
+          )),
       body: Consumer<FavoriteController>(
           builder: (context, favController, child) {
         return GridView.builder(
@@ -58,8 +60,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             itemCount: favController.favList.length,
             itemBuilder: (context, index) => CardProduct(
                   foodList: favController.favList,
-                  index: index, isFavorite: favController.isFavorite(favController.favList[index]),
-                  
+                  index: index,
+                  isFavorite:
+                      favController.isFavorite(favController.favList[index]),
                 ));
       }),
     );

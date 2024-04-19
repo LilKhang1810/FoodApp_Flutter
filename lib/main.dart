@@ -31,24 +31,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: SignInPage()
-        // home: DetailView(
-        //   food: Food(
-        //       name: 'EVM serving of 6 chicken McNuggets™',
-        //       brand: 'Mc Donald',
-        //       img_url:
-        //           'https://mcdonalds.vn/uploads/2018/food/evm/EVM_03_6pcs_chicken_mcnuggets_0.png',
-        //       type: 'chicken fried',
-        //       price: 79000,
-        //       popular: true,
-        //       rating: 4),
-        // ),
-        );
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: SignInPage(),
+      routes: {
+        '/signin': (context) => SignInPage(),
+      },
+      // home: DetailView(
+      //   food: Food(
+      //       name: 'EVM serving of 6 chicken McNuggets™',
+      //       brand: 'Mc Donald',
+      //       img_url:
+      //           'https://mcdonalds.vn/uploads/2018/food/evm/EVM_03_6pcs_chicken_mcnuggets_0.png',
+      //       type: 'chicken fried',
+      //       price: 79000,
+      //       popular: true,
+      //       rating: 4),
+      // ),
+    );
   }
 }

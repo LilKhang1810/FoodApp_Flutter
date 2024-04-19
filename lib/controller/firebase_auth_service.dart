@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseAuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -35,5 +36,14 @@ class FirebaseAuthService {
       print('Something went wrong');
     }
     return null;
+  }
+
+  Future<User?> signOut() async {
+    try {
+      await _auth.signOut();
+      print('User signed out');
+    } catch (e) {
+      print('Something went wrong');
+    }
   }
 }

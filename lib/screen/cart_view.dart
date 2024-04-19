@@ -29,6 +29,7 @@ class _CartViewState extends State<CartView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Giỏ hàng'),
       ),
       body: Consumer<CartProvider>(builder: (context, cart, child) {
